@@ -4,13 +4,13 @@ require 'open3'
 require 'json'
 
 ffmpeg_bin = '/usr/local/bin/ffmpeg'
-target_il  = -24.0
-target_lra = +11.0
-target_tp  = -2.0
-samplerate = '48k'
+target_il  = ARGV[2] # target loudness in LUFS (e.g -23)
+target_lra = ARGV[3] # target loudness range measured in Loudness units (LU) eg. +11
+target_tp  = ARGV[4] # target truepeak loudness of the true peak eg -2
+samplerate = ARGV[5] # samplerate of output e.g. '48k'
 
-if ARGF.argv.count != 2
-  puts "Usage: #{$PROGRAM_NAME} input.wav output.wav"
+if ARGF.argv.count != 6
+  puts "Usage: #{$PROGRAM_NAME} input.wav output.wav targetIL-eg-24 targetLRA-eg+11 targetTP-eg-2 samplerate-eg'48k'"
   exit 1
 end
 
